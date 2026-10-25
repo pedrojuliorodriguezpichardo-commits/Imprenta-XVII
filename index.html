@@ -118,6 +118,74 @@ footer{margin-top:3rem;color:var(--muted);font-size:.9rem;animation:rise .8s 1.2
   .wrap *:not(svg *),.wrap *::before,.wrap *::after{animation:none!important;transition:none!important}
   .hole *{animation-play-state:paused!important}
 }
+
+/* Compatibilidad y adaptación para móviles, tabletas y pantallas táctiles */
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; scroll-behavior: smooth; }
+body { min-width: 0; overflow-wrap: anywhere; }
+button, input, select, textarea { font: inherit; }
+button, input, select, textarea, a { touch-action: manipulation; }
+img, svg, video, canvas { max-width: 100%; }
+.wrap { width: 100%; }
+main > section, main > form, .ok { min-width: 0; }
+.row { grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 560px) {
+  .row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 880px) {
+  main { grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); }
+}
+input, select, textarea { min-width: 0; max-width: 100%; }
+input[type="date"] { min-height: 2.8rem; }
+.drop { min-width: 0; }
+.dz { min-width: 0; padding: clamp(.8rem, 3vw, 1.1rem); }
+.dz span { min-width: 0; overflow-wrap: anywhere; }
+.pv { min-width: 0; flex-wrap: wrap; }
+.pv > div { min-width: 0; overflow-wrap: anywhere; }
+.pv small { overflow-wrap: anywhere; }
+button.send, .again { min-height: 44px; max-width: 100%; }
+:focus-visible { outline-offset: 3px; }
+/* Fallbacks for browsers without color-mix() */
+.drop:hover .dz, .drop.over .dz { background: var(--bg); }
+input:not([type=file]):focus, select:focus, textarea:focus {
+  box-shadow: 0 0 0 3px rgba(229, 0, 125, .18);
+}
+@supports (background: color-mix(in srgb, red 10%, white)) {
+  .drop:hover .dz, .drop.over .dz {
+    background: color-mix(in srgb, var(--m) 6%, var(--bg));
+  }
+  input:not([type=file]):focus, select:focus, textarea:focus {
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--m) 18%, transparent);
+  }
+}
+@media (max-width: 559px) {
+  .wrap { padding: max(1rem, env(safe-area-inset-left)) max(1rem, env(safe-area-inset-right)); }
+  header { min-height: 44px; }
+  .brand { font-size: 1.2rem; }
+  .mark { width: 32px; height: 32px; }
+  main { gap: 1.5rem; margin-top: 1.5rem; }
+  .hole { width: min(68vw, 240px); margin-inline: auto; }
+  h1 { font-size: clamp(2rem, 9vw, 2.8rem); }
+  .lead { max-width: none; }
+  form, .ok { padding: 1rem; gap: .9rem; border-radius: 12px; }
+  form h2, .ok h2 { font-size: 1.35rem; }
+  .dz { gap: .65rem; }
+  .dz svg { width: 30px; height: 30px; }
+  .pv .th { width: 44px; height: 44px; }
+  .pv button { min-height: 40px; }
+  footer { margin-top: 2rem; }
+}
+@media (max-width: 360px) {
+  .wrap { padding-left: .75rem; padding-right: .75rem; }
+  .brand { font-size: 1.05rem; }
+  .dz { align-items: flex-start; }
+  .pv { gap: .5rem; padding: .6rem; }
+}
+@media (hover: none) {
+  .list li:hover { transform: none; }
+  .dz:hover svg { transform: none; }
+  button.send:hover::before { transform: translateX(-101%); }
+  button.send:hover { color: var(--bg); }
+}
 </style>
 </head>
 <body>
